@@ -1,4 +1,5 @@
 import React from "react";
+import EditRecipe from './EditRecipe';
 
 const Recipe = props => {
   const getIngredients = array => {
@@ -9,12 +10,10 @@ const Recipe = props => {
   };
   return (
     <div>
-      {console.log(props.recipeViewState)}
       {props.recipeViewState ? 
       (<div>
-      {console.log(props.recipeViewState)}
-  
-      <button type="submit" value={props.element.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
+   
+    <button type="submit" value={props.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
       <div className="panel">
         <h3>Ingredients</h3>
         <ul>{getIngredients(props.element.ingredients)}</ul>
@@ -26,14 +25,13 @@ const Recipe = props => {
         >
           delete
         </button>
-        <button onClick={props.handleEdit} type="submit" className="edit">
-          edit
-        </button>
+        {/* {console.log('current recipe name ', props.recipe)} */}
+        <EditRecipe handleIngredients ={props.handleIngredients} handleEditSubmit = {props.handleEditSubmit} name = {props.name} handleRecipeName = {props.handleRecipeName} recipe={props.recipe} ingredients={props.element.ingredients}editState = {props.editRecipeModalState}value={props.id}toggleEditModal={props.toggleEditModal}/>
       </div>
     </div> )
       :(
         <div>
-      <button type="submit" value={props.element.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
+      <button type="submit" value={props.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
       <div className="panel none">
         <h3>Ingredients</h3>
         <ul>{getIngredients(props.element.ingredients)}</ul>

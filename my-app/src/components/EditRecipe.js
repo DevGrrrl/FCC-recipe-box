@@ -1,53 +1,57 @@
 import React from "react";
 
-const RecipeModal = props => {
+const EditModal = props => {
+  const recipe = props.recipe
   return (
     <div>
-      <button type="submit" id="myBtn" onClick={props.toggleAddRecipeModal}>
-        Open Modal
+      <button type="submit" value = {props.value} id="myBtn" onClick={props.toggleEditModal}>
+        Edit
       </button>
-
-      {props.addRecipeModalState ? (
+ 
+      {props.editState ? (
         <div id="myModal" className="modal">
           <div className="modal-content">
-            <span onClick = {props.toggleAddRecipeModal}className="close">&times;</span>
+            <span onClick = {props.toggleEditModal}className="close">&times;</span>
             <form
               onSubmit={e => {
-                props.handleRecipeSubmit(e);
+                props.handleEditSubmit(e);
               }}
             >
               <fieldset>
-                <legend>Add A Recipe</legend>
+                <legend>Edit Recipe</legend>
                 <label htmlFor="enter-recipe-name">Recipe</label>
                 <textarea
                   id="enter-recipe-name"
                   cols="100"
                   rows="1"
                   value={props.name}
-                  placeholder="recipe name"
+                  placeholder={props.recipe}
                   onChange={props.handleRecipeName}
                 />
                 <p>
-                  <label htmlFor="enter-recipe-ingredients">Ingerdients</label>
+                  <label htmlFor="enter-recipe-ingredients">Ingredients</label>
                   <textarea
                     id="enter-recipe-ingredients"
                     cols="100"
                     rows="5"
-                    value={props.ingredients}
+                    value={props.addIngredients}
                     onChange={props.handleIngredients}
-                    placeholder="Enter the ingredients separated by a comma"
+                    placeholder={props.ingredients}
                   />
                 </p>
-                <input type="submit" value="Add Recipe" />
+                <input type="submit" value="Submit" />
               </fieldset>
             </form>
           </div>
         </div>
       ) : (
-        <div id="myModal" className="modal none"></div>
-  )
-}
-</div>
-  )}
+        <div id="myModal" className="modal none">
+        </div>
+      )}
+    </div>
+  );
+};
 
-export default RecipeModal;
+export default EditModal;
+
+

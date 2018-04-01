@@ -30,6 +30,8 @@ class MainForm extends React.Component {
       addIngredients: "",
       addName: "",
       addRecipeModalState: false,
+      editRecipeModalState: false,
+      currentRecipe: 0
     };
 
     this.handleRecipeName = this.handleRecipeName.bind(this);
@@ -39,8 +41,10 @@ class MainForm extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
     this.deleteRecipes = this.deleteRecipes.bind(this);
     this.toggleAddRecipeModal = this.toggleAddRecipeModal.bind(this);
+    this.toggleEditModal = this.toggleEditModal.bind(this);
     this.toggleRecipeView = this.toggleRecipeView.bind(this);
-    this.changeState=this.changeState.bind(this)
+    this.changeState = this.changeState.bind(this);
+    this.handleEditSubmit = this.handleEditSubmit.bind(this)
   }
 
   changeState(e, cb) {
@@ -48,23 +52,24 @@ class MainForm extends React.Component {
     let recipes = [...this.state.recipes];
     let newArr = recipes.map(elem => {
       if (elem.id == id) {
-        elem.view = !(elem.view);
+        elem.view = !elem.view;
         return elem;
+      } else {
+        elem.view = false;
+        return elem
       }
-      else {
-        return elem;
-      }
-    })
-    cb(newArr)
+    });
+    cb(newArr);
   }
   toggleRecipeView(e) {
+    console.log(e.target.value)
     e.preventDefault();
-    this.changeState(e,res=>{
-      console.log(res)
-       this.setState({
-    recipes: res
-  });
-    })
+    this.changeState(e, res => {
+      this.setState({
+        recipes: res,
+        currentRecipe: e.target.value
+      });
+    });
   }
 
   toggleAddRecipeModal(e) {
@@ -72,6 +77,14 @@ class MainForm extends React.Component {
     this.setState({
       addRecipeModalState: !this.state.addRecipeModalState
     });
+  }
+
+  toggleEditModal(e) {
+    // console.log(e.target.value)
+    e.preventDefault();
+    this.setState({
+      editRecipeModalState: !this.state.editRecipeModalState,
+    })
   }
 
   deleteRecipes(name, recipes, cb) {
@@ -98,11 +111,6 @@ class MainForm extends React.Component {
     this.setState({
       recipes: JSON.parse(localStorage.getItem("recipes"))
     });
-  }
-
-  handleEdit(e) {
-    e.preventDefault();
-    console.log("Edit clicked");
   }
 
   handleRecipeName(e) {
@@ -141,7 +149,6 @@ class MainForm extends React.Component {
 
   handleRecipeSubmit(e) {
     e.preventDefault();
-    console.log(e.currentTarget);
     this.createNewRecipe(recipes => {
       const updatedRecipes = recipes;
       this.setState({
@@ -150,6 +157,38 @@ class MainForm extends React.Component {
         addIngredients: ""
       });
     });
+  }
+
+  handleEditSubmit(e){
+    e.preventDefault()
+    //replace old recipe with new one;
+    const recipes = [ ...this.state.recipes];
+    let ingredients = this.state.addIngredients;
+    ingredients = ingredients.split(",");
+    const name = this.state.addName;
+
+    let editedRecipe = recipes.filter(elem=>{
+      if(elem.id == this.state.currentRecipe){
+        elem.name = name
+        elem.ingredients =ingredients
+        return elem;
+      }
+    })
+  
+   const localStorageRecipes = JSON.parse(localStorage.getItem('recipes'));
+   let newArr= localStorageRecipes.map(e=>{
+     if(e.id == this.state.currentRecipe){
+       e.name = editedRecipe[0].name;
+       e.ingredients = editedRecipe[0].ingredients;
+       return e;
+     } else {
+       return e;
+     }
+   })
+   localStorage.setItem('recipes', JSON.stringify(newArr))
+   this.setState({
+    recipes: JSON.parse(localStorage.getItem("recipes"))
+  });
   }
 
   render() {
@@ -163,8 +202,15 @@ class MainForm extends React.Component {
             element={elem}
             handleDelete={this.handleDelete}
             handleEdit={this.handleEdit}
+            toggleEditModal={this.toggleEditModal}
             toggleRecipeView={this.toggleRecipeView}
             recipeViewState={elem.view}
+            editRecipeModalState={this.state.editRecipeModalState}
+            handleRecipeName ={this.handleRecipeName}
+            handleIngredients ={this.handleIngredients}
+            name={this.state.AddName}
+            addIngredients={this.state.addIngredients}
+            handleEditSubmit={this.handleEditSubmit}
           />
         );
       });
@@ -174,6 +220,7 @@ class MainForm extends React.Component {
       <div>
         <div>{getRecipes(this.state.recipes)}</div>
         <RecipeModal
+        
           toggleAddRecipeModal={this.toggleAddRecipeModal}
           addRecipeModalState={this.state.addRecipeModalState}
           ingredients={this.state.addIngredients}
