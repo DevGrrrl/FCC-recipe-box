@@ -14,7 +14,7 @@ const Recipe = props => {
       (<div>
       {console.log(props.recipeViewState)}
   
-      <button type="submit" value={props.element.name}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
+      <button type="submit" value={props.element.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
       <div className="panel">
         <h3>Ingredients</h3>
         <ul>{getIngredients(props.element.ingredients)}</ul>
@@ -33,7 +33,7 @@ const Recipe = props => {
     </div> )
       :(
         <div>
-      <h1 onClick ={props.toggleRecipeView}  className="accordion">{props.element.name}</h1>
+      <button type="submit" value={props.element.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
       <div className="panel none">
         <h3>Ingredients</h3>
         <ul>{getIngredients(props.element.ingredients)}</ul>

@@ -8,13 +8,20 @@ class MainForm extends React.Component {
     super();
     this.state = {
       recipes: JSON.parse(localStorage.getItem("recipes")) || [
-        { name: "pie", ingredients: ["pastry", "oil", "carrots"], view: false },
         {
+          id: 0,
+          name: "pie",
+          ingredients: ["pastry", "oil", "carrots"],
+          view: false
+        },
+        {
+          id: 1,
           name: "lunch",
           ingredients: ["pastry", "oil", "carrots"],
           view: false
         },
         {
+          id: 2,
           name: "dinner",
           ingredients: ["pastry", "oil", "carrots"],
           view: false
@@ -23,7 +30,6 @@ class MainForm extends React.Component {
       addIngredients: "",
       addName: "",
       addRecipeModalState: false,
-      recipeViewState: false
     };
 
     this.handleRecipeName = this.handleRecipeName.bind(this);
@@ -34,23 +40,40 @@ class MainForm extends React.Component {
     this.deleteRecipes = this.deleteRecipes.bind(this);
     this.toggleAddRecipeModal = this.toggleAddRecipeModal.bind(this);
     this.toggleRecipeView = this.toggleRecipeView.bind(this);
+    this.changeState=this.changeState.bind(this)
   }
 
+  changeState(e, cb) {
+    let id = e.target.value;
+    let recipes = [...this.state.recipes];
+    let newArr = recipes.map(elem => {
+      if (elem.id == id) {
+        elem.view = !(elem.view);
+        return elem;
+      }
+      else {
+        return elem;
+      }
+    })
+    cb(newArr)
+  }
   toggleRecipeView(e) {
     e.preventDefault();
-    //map through recipes and set toggle view
-    
-    console.log(e.target.value)
-    this.setState({
-      recipeViewState: !this.state.recipeViewState
-    });
+    this.changeState(e,res=>{
+      console.log(res)
+       this.setState({
+    recipes: res
+  });
+    })
   }
+
   toggleAddRecipeModal(e) {
     e.preventDefault();
     this.setState({
       addRecipeModalState: !this.state.addRecipeModalState
     });
   }
+
   deleteRecipes(name, recipes, cb) {
     //delete via key instead
     let newArr = [];
@@ -100,8 +123,13 @@ class MainForm extends React.Component {
     let ingredients = this.state.addIngredients;
     ingredients = ingredients.split(",");
     const name = this.state.addName;
-    let recipes = this.state.recipes;
+
+    //generate unique id
+    const recipes = this.state.recipes;
+    const length = this.state.recipes.length;
+    const lastId = this.state.recipes[length - 1].id;
     const newRecipe = {
+      id: lastId + 1,
       name: name,
       ingredients: ingredients,
       view: false
@@ -130,12 +158,13 @@ class MainForm extends React.Component {
         return (
           <Recipe
             key={i}
+            id={elem.id}
             recipe={elem.name}
             element={elem}
             handleDelete={this.handleDelete}
             handleEdit={this.handleEdit}
             toggleRecipeView={this.toggleRecipeView}
-            recipeViewState={this.state.recipeViewState}
+            recipeViewState={elem.view}
           />
         );
       });
