@@ -1,7 +1,7 @@
 import React from "react";
 
 const EditModal = props => {
-  const recipe = props.recipe
+
   return (
     <div>
       <button type="submit" value = {props.value} id="myBtn" onClick={props.toggleEditModal}>

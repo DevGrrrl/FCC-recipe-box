@@ -1,5 +1,4 @@
 import React from "react";
-import render from "react-dom";
 import Recipe from "./Recipe";
 import RecipeModal from "./RecipeModal";
 
@@ -10,20 +9,20 @@ class MainForm extends React.Component {
       recipes: JSON.parse(localStorage.getItem("recipes")) || [
         {
           id: 0,
-          name: "pie",
-          ingredients: ["pastry", "oil", "carrots"],
+          name: "Cherry Pie",
+          ingredients: ["pastry", "cherries", "sugar"],
           view: false
         },
         {
           id: 1,
-          name: "lunch",
-          ingredients: ["pastry", "oil", "carrots"],
+          name: "Roast Dinner",
+          ingredients: ["potatoes", "peas", "kale", "carrots", "nuts", "herbs"],
           view: false
         },
         {
           id: 2,
-          name: "dinner",
-          ingredients: ["pastry", "oil", "carrots"],
+          name: "Dhal",
+          ingredients: ["lentils", "spices", "tomatoe paste"],
           view: false
         }
       ],
@@ -56,7 +55,7 @@ class MainForm extends React.Component {
         return elem;
       } else {
         elem.view = false;
-        return elem
+        return elem;
       }
     });
     cb(newArr);
@@ -80,7 +79,6 @@ class MainForm extends React.Component {
   }
 
   toggleEditModal(e) {
-    // console.log(e.target.value)
     e.preventDefault();
     this.setState({
       editRecipeModalState: !this.state.editRecipeModalState,
@@ -88,10 +86,9 @@ class MainForm extends React.Component {
   }
 
   deleteRecipes(name, recipes, cb) {
-    //delete via key instead
-    let newArr = [];
     let filtered = recipes;
     filtered = filtered.filter(e => {
+      //check by id instead
       return !(e.name === name);
     });
     cb(filtered);
@@ -105,9 +102,7 @@ class MainForm extends React.Component {
     this.deleteRecipes(name, recipes, function(res) {
       newArr = res;
     });
-
     localStorage.setItem("recipes", JSON.stringify(newArr));
-
     this.setState({
       recipes: JSON.parse(localStorage.getItem("recipes"))
     });
@@ -131,7 +126,7 @@ class MainForm extends React.Component {
     let ingredients = this.state.addIngredients;
     ingredients = ingredients.split(",");
     const name = this.state.addName;
-
+    
     //generate unique id
     const recipes = this.state.recipes;
     const length = this.state.recipes.length;
@@ -167,30 +162,23 @@ class MainForm extends React.Component {
     ingredients = ingredients.split(",");
     const name = this.state.addName;
 
-    let editedRecipe = recipes.filter(elem=>{
+    let editedRecipes = recipes.filter(elem=>{
       if(elem.id == this.state.currentRecipe){
         elem.name = name
         elem.ingredients =ingredients
         return elem;
+      } else {
+        return elem;
       }
-    })
-  
-   const localStorageRecipes = JSON.parse(localStorage.getItem('recipes'));
-   let newArr= localStorageRecipes.map(e=>{
-     if(e.id == this.state.currentRecipe){
-       e.name = editedRecipe[0].name;
-       e.ingredients = editedRecipe[0].ingredients;
-       return e;
-     } else {
-       return e;
-     }
-   })
-   localStorage.setItem('recipes', JSON.stringify(newArr))
-   this.setState({
-    recipes: JSON.parse(localStorage.getItem("recipes"))
-  });
-  }
+    });
 
+    this.setState({
+      recipes: editedRecipes
+    });
+    
+   localStorage.setItem('recipes', JSON.stringify(editedRecipes));
+  }
+  
   render() {
     const getRecipes = recipes => {
       return recipes.map((elem, i) => {
