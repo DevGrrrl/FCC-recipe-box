@@ -4,7 +4,7 @@
 
 ### Objective:
 
-Objective: Build a CodePen.io app that is functionally similar to[this](https://codepen.io/FreeCodeCamp/full/xVXWag).
+Objective: Build a CodePen.io app that is functionally similar to [this](https://codepen.io/FreeCodeCamp/full/xVXWag).
 
 ### User Stories:
 
