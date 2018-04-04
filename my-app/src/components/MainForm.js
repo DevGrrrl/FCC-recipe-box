@@ -88,7 +88,7 @@ class MainForm extends React.Component {
   deleteRecipes(name, recipes, cb) {
     let filtered = recipes;
     filtered = filtered.filter(e => {
-      //check by id instead
+      //now that id is added, check by id instead
       return !(e.name === name);
     });
     cb(filtered);
@@ -130,7 +130,13 @@ class MainForm extends React.Component {
     //generate unique id
     const recipes = this.state.recipes;
     const length = this.state.recipes.length;
-    const lastId = this.state.recipes[length - 1].id;
+    let lastId;
+    if((this.state.recipes).length>0){
+      lastId = this.state.recipes[length - 1].id;
+    } else {
+      lastId = 0;
+    }
+   
     const newRecipe = {
       id: lastId + 1,
       name: name,

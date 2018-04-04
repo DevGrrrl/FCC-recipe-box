@@ -4,7 +4,7 @@ const RecipeModal = props => {
   return (
     <div>
       <button type="submit" id="myBtn" onClick={props.toggleAddRecipeModal}>
-        Open Modal
+        Add Recipe
       </button>
 
       {props.addRecipeModalState ? (
