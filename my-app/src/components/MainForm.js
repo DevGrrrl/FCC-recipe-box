@@ -85,24 +85,23 @@ class MainForm extends React.Component {
     })
   }
 
-  deleteRecipes(name, recipes, cb) {
-    let filtered = recipes;
-    filtered = filtered.filter(e => {
-      //now that id is added, check by id instead
-      return !(e.name === name);
+  deleteRecipes(id, recipes, cb) {
+    let filteredRecipes = recipes;
+    filteredRecipes = filteredRecipes.filter(recipe => {
+      return !(recipe.id == id);
     });
-    cb(filtered);
+    cb(filteredRecipes);
   }
 
   handleDelete(e) {
     e.preventDefault();
-    const name = e.target.value;
+    const id = e.target.value;
     let recipes = [...this.state.recipes];
-    let newArr;
-    this.deleteRecipes(name, recipes, function(res) {
-      newArr = res;
+    let newRecipes;
+    this.deleteRecipes(id, recipes, function(res) {
+      newRecipes = res;
     });
-    localStorage.setItem("recipes", JSON.stringify(newArr));
+    localStorage.setItem("recipes", JSON.stringify(newRecipes));
     this.setState({
       recipes: JSON.parse(localStorage.getItem("recipes"))
     });
@@ -192,7 +191,6 @@ class MainForm extends React.Component {
           <Recipe
             key={i}
             id={elem.id}
-            recipe={elem.name}
             element={elem}
             handleDelete={this.handleDelete}
             handleEdit={this.handleEdit}

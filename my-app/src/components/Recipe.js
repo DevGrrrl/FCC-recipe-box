@@ -18,7 +18,7 @@ const Recipe = props => {
         <h3>Ingredients</h3>
         <ul>{getIngredients(props.element.ingredients)}</ul>
         <button
-          value={props.recipe}
+          value={props.element.name}
           onClick={props.handleDelete}
           type="submit"
           className="delete"
@@ -26,7 +26,9 @@ const Recipe = props => {
           delete
         </button>
         {/* {console.log('current recipe name ', props.recipe)} */}
-        <EditRecipe {...props}/>
+        <EditRecipe 
+
+        {...props}/>
       </div>
     </div> )
       :(
@@ -36,7 +38,7 @@ const Recipe = props => {
         <h3>Ingredients</h3>
         <ul>{getIngredients(props.element.ingredients)}</ul>
         <button
-          value={props.recipe}
+          value={props.element.name}
           onClick={props.handleDelete}
           type="submit"
           className="delete"

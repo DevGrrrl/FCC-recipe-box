@@ -7,7 +7,6 @@ const EditModal = props => {
       <button type="submit" value = {props.value} id="myBtn" onClick={props.toggleEditModal}>
         Edit
       </button>
-     
       {props.editRecipeModalState ? (
         <div id="myModal" className="modal">
           <div className="modal-content">
@@ -25,7 +24,7 @@ const EditModal = props => {
                   cols="100"
                   rows="1"
                   value={props.name}
-                  placeholder={props.recipe}
+                  placeholder={props.element.name}
                   onChange={props.handleRecipeName}
                 />
                 <p>
@@ -36,7 +35,7 @@ const EditModal = props => {
                     rows="5"
                     value={props.addIngredients}
                     onChange={props.handleIngredients}
-                    placeholder={props.ingredients}
+                    placeholder={props.element.ingredients}
                   />
                 </p>
                 <input type="submit" value="Submit" />
@@ -44,7 +43,8 @@ const EditModal = props => {
             </form>
           </div>
         </div>
-      ) : (     
+      ) : (
+     
         <div />
       )}
     </div>
