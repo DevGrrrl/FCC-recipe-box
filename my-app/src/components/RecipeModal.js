@@ -44,7 +44,7 @@ const RecipeModal = props => {
           </div>
         </div>
       ) : (
-        <div id="myModal" className="modal none"></div>
+        <div/>
   )
 }
 </div>

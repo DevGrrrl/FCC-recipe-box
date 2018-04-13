@@ -7,11 +7,11 @@ const EditModal = props => {
       <button type="submit" value = {props.value} id="myBtn" onClick={props.toggleEditModal}>
         Edit
       </button>
- 
+     
       {props.editState ? (
         <div id="myModal" className="modal">
           <div className="modal-content">
-            <span onClick = {props.toggleEditModal}className="close">&times;</span>
+            <span onClick = {props.toggleEditModal}  className="close">&times;</span>
             <form
               onSubmit={e => {
                 props.handleEditSubmit(e);
@@ -44,9 +44,8 @@ const EditModal = props => {
             </form>
           </div>
         </div>
-      ) : (
-        <div id="myModal" className="modal none">
-        </div>
+      ) : (     
+        <div />
       )}
     </div>
   );
