@@ -8,7 +8,7 @@ const EditModal = props => {
         Edit
       </button>
      
-      {props.editState ? (
+      {props.editRecipeModalState ? (
         <div id="myModal" className="modal">
           <div className="modal-content">
             <span onClick = {props.toggleEditModal}  className="close">&times;</span>

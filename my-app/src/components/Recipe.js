@@ -26,7 +26,7 @@ const Recipe = props => {
           delete
         </button>
         {/* {console.log('current recipe name ', props.recipe)} */}
-        <EditRecipe handleIngredients ={props.handleIngredients} handleEditSubmit = {props.handleEditSubmit} name = {props.name} handleRecipeName = {props.handleRecipeName} recipe={props.recipe} ingredients={props.element.ingredients}editState = {props.editRecipeModalState}value={props.id}toggleEditModal={props.toggleEditModal}/>
+        <EditRecipe {...props}/>
       </div>
     </div> )
       :(
