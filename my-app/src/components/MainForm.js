@@ -22,7 +22,7 @@ class MainForm extends React.Component {
         {
           id: 2,
           name: "Dhal",
-          ingredients: ["lentils", "spices", "tomatoe paste"],
+          ingredients: ["lentils", "spices", "tomato paste"],
           view: false
         }
       ],
@@ -191,7 +191,6 @@ class MainForm extends React.Component {
     const getRecipes = recipes => {
       return recipes.map((elem, i) => {
         return (
-   
           <Recipe
             key={i}
             element={elem}
@@ -212,8 +211,8 @@ class MainForm extends React.Component {
     };
 
     return (
-      <div>
-        <div>{getRecipes(this.state.recipes)}</div>
+      <div className = "container">
+        <div className ="recipes-container">{getRecipes(this.state.recipes)}</div>
         <RecipeModal
           toggleAddRecipeModal={this.toggleAddRecipeModal}
           addRecipeModalState={this.state.addRecipeModalState}
