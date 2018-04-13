@@ -50,7 +50,7 @@ class MainForm extends React.Component {
     let id = e.target.value;
     let recipes = [...this.state.recipes];
     let newArr = recipes.map(elem => {
-      if (elem.id == id) {
+      if (Number(elem.id) === Number(id)) {
         elem.view = !elem.view;
         return elem;
       } else {
@@ -90,7 +90,7 @@ class MainForm extends React.Component {
     filteredRecipes = filteredRecipes.filter(recipe => {
       console.log(id)
       console.log(recipe.id)
-      return !(recipe.id == id);
+      return !(Number(recipe.id) === Number(id));
     });
     cb(filteredRecipes);
   }
@@ -171,7 +171,7 @@ class MainForm extends React.Component {
     const name = this.state.addName;
 
     let editedRecipes = recipes.filter(elem=>{
-      if(elem.id == this.state.currentRecipe){
+      if(Number(elem.id) === Number(this.state.currentRecipe)){
         elem.name = name
         elem.ingredients =ingredients
         return elem;
@@ -215,7 +215,6 @@ class MainForm extends React.Component {
       <div>
         <div>{getRecipes(this.state.recipes)}</div>
         <RecipeModal
-        
           toggleAddRecipeModal={this.toggleAddRecipeModal}
           addRecipeModalState={this.state.addRecipeModalState}
           ingredients={this.state.addIngredients}

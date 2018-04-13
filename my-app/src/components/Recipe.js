@@ -25,7 +25,6 @@ const Recipe = props => {
         >
           delete
         </button>
-        {/* {console.log('current recipe name ', props.recipe)} */}
         <EditRecipe  {...props}/>
       </div>
     </div> )
@@ -33,7 +32,7 @@ const Recipe = props => {
         <div>
       <button type="submit" value={props.element.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
       </div>)
-     }
+      }
      </div>
      
   );
