@@ -88,6 +88,8 @@ class MainForm extends React.Component {
   deleteRecipes(id, recipes, cb) {
     let filteredRecipes = recipes;
     filteredRecipes = filteredRecipes.filter(recipe => {
+      console.log(id)
+      console.log(recipe.id)
       return !(recipe.id == id);
     });
     cb(filteredRecipes);
@@ -96,6 +98,7 @@ class MainForm extends React.Component {
   handleDelete(e) {
     e.preventDefault();
     const id = e.target.value;
+    console.log('the id i', id);
     let recipes = [...this.state.recipes];
     let newRecipes;
     this.deleteRecipes(id, recipes, function(res) {
@@ -188,9 +191,9 @@ class MainForm extends React.Component {
     const getRecipes = recipes => {
       return recipes.map((elem, i) => {
         return (
+   
           <Recipe
             key={i}
-            id={elem.id}
             element={elem}
             handleDelete={this.handleDelete}
             handleEdit={this.handleEdit}

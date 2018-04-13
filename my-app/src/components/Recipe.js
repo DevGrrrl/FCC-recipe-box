@@ -13,12 +13,12 @@ const Recipe = props => {
       {props.recipeViewState ? 
       (<div>
    
-    <button type="submit" value={props.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
+    <button type="submit" value={props.element.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
       <div className="panel">
         <h3>Ingredients</h3>
         <ul>{getIngredients(props.element.ingredients)}</ul>
         <button
-          value={props.element.name}
+          value={props.element.id}
           onClick={props.handleDelete}
           type="submit"
           className="delete"
@@ -26,34 +26,16 @@ const Recipe = props => {
           delete
         </button>
         {/* {console.log('current recipe name ', props.recipe)} */}
-        <EditRecipe 
-
-        {...props}/>
+        <EditRecipe  {...props}/>
       </div>
     </div> )
       :(
         <div>
-      <button type="submit" value={props.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
-      <div className="panel none">
-        <h3>Ingredients</h3>
-        <ul>{getIngredients(props.element.ingredients)}</ul>
-        <button
-          value={props.element.name}
-          onClick={props.handleDelete}
-          type="submit"
-          className="delete"
-        >
-          delete
-        </button>
-        <button onClick={props.handleEdit} type="submit" className="edit">
-          edit
-        </button>
-      </div>
+      <button type="submit" value={props.element.id}onClick ={props.toggleRecipeView} className="accordion">{props.element.name}</button>
       </div>)
      }
      </div>
      
-  
   );
 };
 
