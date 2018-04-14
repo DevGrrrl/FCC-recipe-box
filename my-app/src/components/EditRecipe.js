@@ -73,8 +73,7 @@ const EditModal = props => {
                   id="enter-recipe-name"
                   cols="35"
                   rows="1"
-                  value={props.name}
-                  placeholder={props.element.name}
+                  defaultValue={props.element.name}
                   onChange={props.handleRecipeName}
                 />
                 <p>
@@ -83,10 +82,8 @@ const EditModal = props => {
                     id="enter-recipe-ingredients"
                     cols="35"
                     rows="5"
-                    value={props.addIngredients}
-                    onChange={props.handleIngredients}
-                    placeholder={props.element.ingredients}
-                  />
+                    defaultValue={props.element.ingredients}
+                    onChange={props.handleIngredients}                  />
                 </p>
                 <input type="submit" value="Submit" />
               </fieldset>
