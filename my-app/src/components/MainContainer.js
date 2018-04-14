@@ -1,8 +1,9 @@
 import React from "react";
 import Recipe from "./Recipe";
 import RecipeModal from "./RecipeModal";
+import RecipeList from './RecipeList';
 
-class MainForm extends React.Component {
+class MainContainer extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -212,7 +213,7 @@ class MainForm extends React.Component {
 
     return (
       <div className = "container">
-        <div className ="recipes-container">{getRecipes(this.state.recipes)}</div>
+        <RecipeList className ="recipes-container" recipeList ={getRecipes(this.state.recipes)} />
         <RecipeModal
           toggleAddRecipeModal={this.toggleAddRecipeModal}
           addRecipeModalState={this.state.addRecipeModalState}
@@ -227,4 +228,4 @@ class MainForm extends React.Component {
   }
 }
 
-export default MainForm;
+export default MainContainer;
