@@ -62,7 +62,6 @@ class MainContainer extends React.Component {
     cb(newArr);
   }
   toggleRecipeView(e) {
-    console.log(e.target.value)
     e.preventDefault();
     this.changeState(e, res => {
       this.setState({
@@ -89,8 +88,6 @@ class MainContainer extends React.Component {
   deleteRecipes(id, recipes, cb) {
     let filteredRecipes = recipes;
     filteredRecipes = filteredRecipes.filter(recipe => {
-      console.log(id)
-      console.log(recipe.id)
       return !(Number(recipe.id) === Number(id));
     });
     cb(filteredRecipes);
@@ -99,7 +96,6 @@ class MainContainer extends React.Component {
   handleDelete(e) {
     e.preventDefault();
     const id = e.target.value;
-    console.log('the id i', id);
     let recipes = [...this.state.recipes];
     let newRecipes;
     this.deleteRecipes(id, recipes, function(res) {
@@ -167,6 +163,7 @@ class MainContainer extends React.Component {
 
   handleEditSubmit(e){
     e.preventDefault()
+    //if this.state.name is false, use the orignal recope
     //replace old recipe with new one;
     const recipes = [ ...this.state.recipes];
     let ingredients = this.state.addIngredients;
@@ -175,17 +172,25 @@ class MainContainer extends React.Component {
 
     let editedRecipes = recipes.filter(elem=>{
       if(Number(elem.id) === Number(this.state.currentRecipe)){
-        elem.name = name
-        elem.ingredients =ingredients
+        if(this.state.addName){
+          elem.name = name
+        }
+        if(this.state.addIngredients){
+          elem.ingredients =ingredients
+        } 
         return elem;
       } else {
         return elem;
       }
     });
 
+
+
     this.setState({
       recipes: editedRecipes,
       editRecipeModalState: !this.state.editRecipeModalState,
+      addName: "",
+      addIngredients: "",
     });
     
    localStorage.setItem('recipes', JSON.stringify(editedRecipes));

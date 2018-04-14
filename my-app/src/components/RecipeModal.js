@@ -84,6 +84,7 @@ const RecipeModal = props => {
                   value={props.name}
                   placeholder="recipe name"
                   onChange={props.handleRecipeName}
+                  pattern="[-zA-Z0-9-]+"
                 />
                 <p>
                   <Label htmlFor="enter-recipe-ingredients">Ingredients</Label>
@@ -94,6 +95,7 @@ const RecipeModal = props => {
                     value={props.ingredients}
                     onChange={props.handleIngredients}
                     placeholder="Enter the ingredients separated by a comma"
+                    pattern="[-zA-Z0-9-]+"
                   />
                 </p>
                 <input type="submit" value="Add Recipe" />

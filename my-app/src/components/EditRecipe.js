@@ -75,6 +75,7 @@ const EditModal = props => {
                   rows="1"
                   defaultValue={props.element.name}
                   onChange={props.handleRecipeName}
+                  pattern="[-zA-Z0-9-]+"
                 />
                 <p>
                   <Label htmlFor="enter-recipe-ingredients">Ingredients</Label>
@@ -83,7 +84,8 @@ const EditModal = props => {
                     cols="35"
                     rows="5"
                     defaultValue={props.element.ingredients}
-                    onChange={props.handleIngredients}                  />
+                    onChange={props.handleIngredients}  
+                    pattern="[-zA-Z0-9-]+"                />
                 </p>
                 <input type="submit" value="Submit" />
               </fieldset>
