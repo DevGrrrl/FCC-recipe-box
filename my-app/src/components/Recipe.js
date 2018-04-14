@@ -61,12 +61,12 @@ const Recipe = props => {
       {props.recipeViewState ? 
       (<div>
    
-    <RecipeTitle type="submit" value={props.element.id}onClick ={props.toggleRecipeView} >{props.element.name}</RecipeTitle>
-      <IngredientsList>
+    <RecipeTitle type="submit" value={props.element.id} onClick={props.toggleRecipeView} >{props.element.name}</RecipeTitle>
+    <IngredientsList>
         <IngredientsTitle>Ingredients</IngredientsTitle>
-        <ul>{getIngredients(props.element.ingredients)}</ul>
+        <ul>    {getIngredients(props.element.ingredients)}</ul>
         <Delete
-          value={props.element.id}
+          value ={props.element.id}
           onClick={props.handleDelete}
           type="submit"
           className="delete"

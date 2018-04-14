@@ -158,9 +158,11 @@ class MainContainer extends React.Component {
       this.setState({
         recipes: updatedRecipes,
         addName: "",
-        addIngredients: ""
+        addIngredients: "",
+        addRecipeModalState: !this.state.addRecipeModalState 
       });
-    });
+    })
+  
   }
 
   handleEditSubmit(e){
@@ -182,7 +184,8 @@ class MainContainer extends React.Component {
     });
 
     this.setState({
-      recipes: editedRecipes
+      recipes: editedRecipes,
+      editRecipeModalState: !this.state.editRecipeModalState,
     });
     
    localStorage.setItem('recipes', JSON.stringify(editedRecipes));
