@@ -10,10 +10,11 @@ const RecipeTitle = styled.button`
   padding: 5%;
   width: 90%;
   display: block;
-  margin: auto;
+  margin: 2% auto 0 auto;
   text-align: left;
   border: none;
   outline: none;
+  font-size: 1rem;
   transition: 0.4s;
   @media (min-width: 700px) {
     width: 90%;
@@ -27,9 +28,16 @@ const IngredientsList = styled.div`
   overflow: hidden;
   width: 90%;
   margin: auto;
+  font-size: 1rem;
+  line-height: 1.5rem;
+
 `
 const IngredientsTitle = styled.h3`
-  
+text-align: center;
+@media (min-width: 700px) {
+  text-align:left;
+  padding-left: 2%;
+}
 `
 
 const Delete = styled.button`
@@ -42,11 +50,21 @@ const Delete = styled.button`
   border: none;
   outline: none;
   transition: 0.4s;
+  font-size: 1rem;
   @media (min-width: 700px) {
      width: 8%;
      padding: 1%;
  }
   
+`
+
+
+const RecipeContainer = styled.div`
+   
+`
+
+const TitleContainer = styled.div`
+
 `
 
 const Recipe = props => {
@@ -59,7 +77,7 @@ const Recipe = props => {
   return (
     <React.Fragment>
       {props.recipeViewState ? 
-      (<div>
+      (<RecipeContainer>
    
     <RecipeTitle type="submit" value={props.element.id} onClick={props.toggleRecipeView} >{props.element.name}</RecipeTitle>
     <IngredientsList>
@@ -75,11 +93,11 @@ const Recipe = props => {
         </Delete>
         <EditRecipe  {...props}/>
       </IngredientsList>
-    </div> )
+    </RecipeContainer> )
       :(
-        <div>
+        <TitleContainer>
       <RecipeTitle type="submit" value={props.element.id}onClick ={props.toggleRecipeView} >{props.element.name}</RecipeTitle>
-      </div>)
+      </TitleContainer>)
       }
      </React.Fragment>
      

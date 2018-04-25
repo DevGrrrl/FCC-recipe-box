@@ -7,26 +7,7 @@ class MainContainer extends React.Component {
   constructor() {
     super();
     this.state = {
-      recipes: JSON.parse(localStorage.getItem("recipes")) || [
-        {
-          id: 0,
-          name: "Cherry Pie",
-          ingredients: ["pastry", "cherries", "sugar"],
-          view: false
-        },
-        {
-          id: 1,
-          name: "Roast Dinner",
-          ingredients: ["potatoes", "peas", "kale", "carrots", "nuts", "herbs"],
-          view: false
-        },
-        {
-          id: 2,
-          name: "Dhal",
-          ingredients: ["lentils", "spices", "tomato paste"],
-          view: false
-        }
-      ],
+      recipes: [],
       addIngredients: "",
       addName: "",
       addRecipeModalState: false,
@@ -47,6 +28,39 @@ class MainContainer extends React.Component {
     this.handleEditSubmit = this.handleEditSubmit.bind(this)
   }
 
+
+ 
+componentDidMount(){
+  const checkLocal = JSON.parse(localStorage.getItem("recipes"))
+  if(checkLocal){
+    this.setState({
+      recipes: checkLocal
+    })
+  } else {
+    this.setState({recipes:[
+      {
+        id: 0,
+        name: "Cherry Pie",
+        ingredients: ["pastry", "cherries", "sugar"],
+        view: false
+      },
+      {
+        id: 1,
+        name: "Roast Dinner",
+        ingredients: ["potatoes", "peas", "kale", "carrots", "nuts", "herbs"],
+        view: false
+      },
+      {
+        id: 2,
+        name: "Dhal",
+        ingredients: ["lentils", "spices", "tomato paste"],
+        view: false
+      }
+    
+    ]})
+  }
+ }
+ 
   changeState(e, cb) {
     let id = e.target.value;
     let recipes = [...this.state.recipes];
@@ -61,6 +75,7 @@ class MainContainer extends React.Component {
     });
     cb(newArr);
   }
+
   toggleRecipeView(e) {
     e.preventDefault();
     this.changeState(e, res => {
@@ -163,7 +178,7 @@ class MainContainer extends React.Component {
 
   handleEditSubmit(e){
     e.preventDefault()
-    //if this.state.name is false, use the orignal recope
+    //if this.state.addName , use the orignal recipe
     //replace old recipe with new one;
     const recipes = [ ...this.state.recipes];
     let ingredients = this.state.addIngredients;
@@ -183,8 +198,6 @@ class MainContainer extends React.Component {
         return elem;
       }
     });
-
-
 
     this.setState({
       recipes: editedRecipes,

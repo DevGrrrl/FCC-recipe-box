@@ -12,7 +12,7 @@ const AddRecipe = styled.button`
   color: #444;
   cursor: pointer;
   padding: 3%;
-  width: 45%;
+  width: 50%;
   margin-top: 1%;
   margin-bottom: 1%;
   text-align: center;
@@ -20,6 +20,7 @@ const AddRecipe = styled.button`
   outline: none;
   transition: 0.4s;
   border-radius: 10px;
+  font-size: 1rem;
   @media (min-width: 700px) {
      width: 20%;
      padding: 0.5%;
@@ -51,13 +52,31 @@ const ModalContent = styled.div `
 `
 const Label = styled.label`
   display:block;
- 
+  font-size: 1rem;
 
 `
 const TextArea = styled.textarea `
   display:block;
   padding: 2%;
+  font-size: 1rem;
 `
+
+const Input = styled.input `
+  font-size: 1rem;
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 3%;
+ `
+
+const Fieldset = styled.fieldset `
+text-overflow: ellipsis;
+overflow: hidden;
+margin: 0;
+border-width: 2px;
+border-style: solid;
+border-color: red;
+` 
 const RecipeModal = props => {
   return (
     <ModalContainer>
@@ -74,7 +93,7 @@ const RecipeModal = props => {
                 props.handleRecipeSubmit(e);
               }}
             >
-              <fieldset>
+              <Fieldset>
                 <legend>Add A Recipe</legend>
                 <Label htmlFor="enter-recipe-name">Recipe</Label>
                 <TextArea
@@ -98,8 +117,8 @@ const RecipeModal = props => {
                     pattern="[-zA-Z0-9-]+"
                   />
                 </p>
-                <input type="submit" value="Add Recipe" />
-              </fieldset>
+                <Input type="submit" value="Add Recipe" />
+              </Fieldset>
             </form>
           </ModalContent>
         </Modal>
