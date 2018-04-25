@@ -112,7 +112,7 @@ componentDidMount(){
   handleRecipeName(e) {
     const value = e.target.value;
     this.setState({
-      addName: value
+      addName: value.toUpperCase()
     });
   }
 
@@ -170,6 +170,8 @@ componentDidMount(){
     localStorage.setItem("recipes", JSON.stringify(recipes));
     cb(recipes);
   }
+  
+
 
   handleRecipeSubmit(e) {
     e.preventDefault();
@@ -187,6 +189,7 @@ componentDidMount(){
 
   //Edit Recipe
 
+ 
   handleEditSubmit(e){
     e.preventDefault()
     //if this.state.addName , use the orignal recipe
@@ -245,10 +248,15 @@ componentDidMount(){
     });
   };
   render() {
+    const {addName, addIngredients} = this.state
+    const addIsEnabled = addName.length > 0  && addIngredients.length > 0
+    const editIsEnabled = addName.length > 0  && addIngredients.length > 0 
     return (
       <div className = "container">
         <RecipeList className ="recipes-container" recipeList ={this.getRecipes(this.state.recipes)} />
         <AddRecipeModal
+          addIsEnabled = {addIsEnabled}
+          editIsEnabled = {editIsEnabled}
           toggleAddRecipeModal={this.toggleAddRecipeModal}
           addRecipeModalState={this.state.addRecipeModalState}
           ingredients={this.state.addIngredients}

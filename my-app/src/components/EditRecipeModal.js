@@ -2,23 +2,6 @@ import React from "react";
 import styled from 'styled-components';
 
 
-const Edit = styled.button`
-  background-color: #eee;
-  color: #444;
-  cursor: pointer;
-  padding: 3%;
-  width: 25%;
-  text-align: center;
-  border: none;
-  outline: none;
-  transition: 0.4s;
-  font-size: 1rem;
-  @media (min-width: 700px) {
-    width: 8%;
-    padding: 1%;
-}
-`
-
 const Modal = styled.div`
   /* Hidden by default */
   position: fixed; /* Stay in place */

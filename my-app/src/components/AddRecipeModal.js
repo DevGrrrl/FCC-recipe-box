@@ -78,6 +78,7 @@ border-style: solid;
 border-color: red;
 ` 
 const RecipeModal = props => {
+  
   return (
     <ModalContainer>
       <AddRecipe type="submit" id="myBtn" onClick={props.toggleAddRecipeModal}>
@@ -87,6 +88,7 @@ const RecipeModal = props => {
       {props.addRecipeModalState ? (
         <Modal id="myModal" className="modal">
           <ModalContent className="modal-content">
+          {/* closeAddRecipeModal */}
             <span onClick = {props.toggleAddRecipeModal}className="close">&times;</span>
             <form
               onSubmit={e => {
@@ -117,7 +119,7 @@ const RecipeModal = props => {
                     pattern="[-zA-Z0-9-]+"
                   />
                 </p>
-                <Input type="submit" value="Add Recipe" />
+                <Input disabled={!props.isEnabled}type="submit" value="Add Recipe" />
               </Fieldset>
             </form>
           </ModalContent>
