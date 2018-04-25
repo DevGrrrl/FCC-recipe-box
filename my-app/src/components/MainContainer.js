@@ -1,6 +1,6 @@
 import React from "react";
 import Recipe from "./Recipe";
-import RecipeModal from "./RecipeModal";
+import AddRecipeModal from "./AddRecipeModal";
 import RecipeList from './RecipeList';
 
 class MainContainer extends React.Component {
@@ -66,10 +66,6 @@ componentDidMount(){
     let id = e.target.value;
     let recipes = [...this.state.recipes];
     let newArr = recipes.map(recipe => {
-      console.log(recipe.id)
-      console.log(typeof(recipe.id))
-      console.log(id)
-      console.log(typeof(id))
       if (recipe.id === id) {
         recipe.view = !recipe.view;
         return recipe;
@@ -81,8 +77,7 @@ componentDidMount(){
     cb(newArr);
   }
 
-  toggleRecipeView(e) {
-   
+  toggleRecipeView(e) { 
     e.preventDefault();
     this.changeRecipeView(e, res => {
       this.setState({
@@ -253,7 +248,7 @@ componentDidMount(){
     return (
       <div className = "container">
         <RecipeList className ="recipes-container" recipeList ={this.getRecipes(this.state.recipes)} />
-        <RecipeModal
+        <AddRecipeModal
           toggleAddRecipeModal={this.toggleAddRecipeModal}
           addRecipeModalState={this.state.addRecipeModalState}
           ingredients={this.state.addIngredients}

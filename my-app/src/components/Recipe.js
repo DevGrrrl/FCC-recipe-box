@@ -1,5 +1,5 @@
 import React from "react";
-import EditRecipe from './EditRecipe';
+import EditRecipeModal from './EditRecipeModal';
 import styled from 'styled-components';
 
 /* Style the buttons that are used to open and close the accordion panel */
@@ -40,7 +40,7 @@ text-align: center;
 }
 `
 
-const Delete = styled.button`
+const Button = styled.button`
   background-color: #eee;
   color: #444;
   cursor: pointer;
@@ -67,14 +67,14 @@ const TitleContainer = styled.div`
 
 `
 
-const Recipe = props => {
-  const getIngredients = array => {
+ const getIngredients = array => {
     let ingredients = [...array];
     return ingredients.map((ingredient, i) => {
       return <li key={i}>{ingredient}</li>;
     });
   };
 
+const Recipe = props => {
 
   return (
     <React.Fragment>
@@ -85,25 +85,29 @@ const Recipe = props => {
     <RecipeTitle type="submit" value={props.element.id} onClick={props.toggleRecipeView} >{props.element.name}</RecipeTitle>
     <IngredientsList>
         <IngredientsTitle>Ingredients</IngredientsTitle>
-        <ul>    {getIngredients(props.element.ingredients)}</ul>
-        <Delete
+        <ul>{getIngredients(props.element.ingredients)}</ul>
+        <Button
           value ={props.element.id}
           onClick={props.handleDelete}
           type="submit"
           className="delete"
         >
           Delete
-        </Delete>
-        <EditRecipe  {...props}/>
+        </Button>
+        <Button type="submit" value = {props.value} id="myBtn" onClick={props.toggleEditModal}>
+        Edit
+        </Button>
+        {props.editRecipeModalState ? (
+           <EditRecipeModal  {...props}/>
+        ) :(null)} 
       </IngredientsList>
     </RecipeContainer> )
       :(
         <TitleContainer>
-      <RecipeTitle type="submit" value={props.element.id}onClick ={props.toggleRecipeView} >{props.element.name}</RecipeTitle>
+      <RecipeTitle type="submit" value={props.element.id}onClick ={props.toggleRecipeView}>{props.element.name}</RecipeTitle>
       </TitleContainer>)
       }
-     </React.Fragment>
-     
+     </React.Fragment>   
   );
 };
 
