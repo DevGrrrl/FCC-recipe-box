@@ -38,19 +38,19 @@ componentDidMount(){
   } else {
     this.setState({recipes:[
       {
-        id: 0,
+        id: "recipe1",
         name: "Cherry Pie",
         ingredients: ["pastry", "cherries", "sugar"],
         view: false
       },
       {
-        id: 1,
+        id: "recipe2",
         name: "Roast Dinner",
         ingredients: ["potatoes", "peas", "kale", "carrots", "nuts", "herbs"],
         view: false
       },
       {
-        id: 2,
+        id: "recipe3",
         name: "Dhal",
         ingredients: ["lentils", "spices", "tomato paste"],
         view: false
@@ -66,7 +66,11 @@ componentDidMount(){
     let id = e.target.value;
     let recipes = [...this.state.recipes];
     let newArr = recipes.map(recipe => {
-      if (parseInt(recipe.id, 10) === parseInt(id, 10)) {
+      console.log(recipe.id)
+      console.log(typeof(recipe.id))
+      console.log(id)
+      console.log(typeof(id))
+      if (recipe.id === id) {
         recipe.view = !recipe.view;
         return recipe;
       } else {
@@ -78,6 +82,7 @@ componentDidMount(){
   }
 
   toggleRecipeView(e) {
+   
     e.preventDefault();
     this.changeRecipeView(e, res => {
       this.setState({
@@ -129,7 +134,7 @@ componentDidMount(){
   deleteRecipe(id, recipes, cb) {
     let filteredRecipes = recipes;
     filteredRecipes = filteredRecipes.filter(recipe => {
-      return !(parseInt(recipe.id, 10) === parseInt(id, 10));
+      return !(recipe.id === id);
     });
     cb(filteredRecipes);
   }
@@ -198,7 +203,7 @@ componentDidMount(){
 
     let editedRecipes = recipes.filter(recipe=>{
       //if the current recipe being edited has the same id as the recipe in state
-      if(parseInt(recipe.id,10) === parseInt(this.state.currentRecipe,10)){
+      if(recipe.id === this.state.currentRecipe){
         //if new data has been added in the name field, replace the old name
         if(this.state.addName){
           recipe.name = name
