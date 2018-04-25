@@ -28,8 +28,7 @@ class MainContainer extends React.Component {
     this.handleEditSubmit = this.handleEditSubmit.bind(this)
   }
 
-
- 
+  //check local storage - end if empty, store example recipes
 componentDidMount(){
   const checkLocal = JSON.parse(localStorage.getItem("recipes"))
   if(checkLocal){
@@ -144,15 +143,10 @@ componentDidMount(){
     //generate unique id
     const recipes = this.state.recipes;
     const length = this.state.recipes.length;
-    let lastId;
-    if((this.state.recipes).length>0){
-      lastId = this.state.recipes[length - 1].id;
-    } else {
-      lastId = 0;
-    }
+    const theId = `recipe${Date.now()}`
    
     const newRecipe = {
-      id: lastId + 1,
+      id: theId,
       name: name,
       ingredients: ingredients,
       view: false
@@ -185,17 +179,17 @@ componentDidMount(){
     ingredients = ingredients.split(",");
     const name = this.state.addName;
 
-    let editedRecipes = recipes.filter(elem=>{
-      if(Number(elem.id) === Number(this.state.currentRecipe)){
+    let editedRecipes = recipes.filter(recipe=>{
+      if(parseInt(recipe.id,10) === parseInt(this.state.currentRecipe,10)){
         if(this.state.addName){
-          elem.name = name
+          recipe.name = name
         }
         if(this.state.addIngredients){
-          elem.ingredients =ingredients
+          recipe.ingredients =ingredients
         } 
-        return elem;
+        return recipe;
       } else {
-        return elem;
+        return recipe;
       }
     });
 
@@ -209,32 +203,31 @@ componentDidMount(){
    localStorage.setItem('recipes', JSON.stringify(editedRecipes));
   }
   
+  getRecipes = recipes => {
+    return recipes.map((elem, i) => {
+      return (
+        <Recipe
+          key={i}
+          element={elem}
+          handleDelete={this.handleDelete}
+          handleEdit={this.handleEdit}
+          toggleEditModal={this.toggleEditModal}
+          toggleRecipeView={this.toggleRecipeView}
+          recipeViewState={elem.view}
+          editRecipeModalState={this.state.editRecipeModalState}
+          handleRecipeName ={this.handleRecipeName}
+          handleIngredients ={this.handleIngredients}
+          name={this.state.AddName}
+          addIngredients={this.state.addIngredients}
+          handleEditSubmit={this.handleEditSubmit}
+        />
+      );
+    });
+  };
   render() {
-    const getRecipes = recipes => {
-      return recipes.map((elem, i) => {
-        return (
-          <Recipe
-            key={i}
-            element={elem}
-            handleDelete={this.handleDelete}
-            handleEdit={this.handleEdit}
-            toggleEditModal={this.toggleEditModal}
-            toggleRecipeView={this.toggleRecipeView}
-            recipeViewState={elem.view}
-            editRecipeModalState={this.state.editRecipeModalState}
-            handleRecipeName ={this.handleRecipeName}
-            handleIngredients ={this.handleIngredients}
-            name={this.state.AddName}
-            addIngredients={this.state.addIngredients}
-            handleEditSubmit={this.handleEditSubmit}
-          />
-        );
-      });
-    };
-
     return (
       <div className = "container">
-        <RecipeList className ="recipes-container" recipeList ={getRecipes(this.state.recipes)} />
+        <RecipeList className ="recipes-container" recipeList ={this.getRecipes(this.state.recipes)} />
         <RecipeModal
           toggleAddRecipeModal={this.toggleAddRecipeModal}
           addRecipeModalState={this.state.addRecipeModalState}
