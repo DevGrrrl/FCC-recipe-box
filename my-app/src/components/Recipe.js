@@ -74,11 +74,13 @@ const Recipe = props => {
       return <li key={i}>{ingredient}</li>;
     });
   };
+
+
   return (
     <React.Fragment>
+      {/* if recipeViewState is true, display the recipe in full */}
       {props.recipeViewState ? 
-      (<RecipeContainer>
-   
+      (<RecipeContainer> 
     <RecipeTitle type="submit" value={props.element.id} onClick={props.toggleRecipeView} >{props.element.name}</RecipeTitle>
     <IngredientsList>
         <IngredientsTitle>Ingredients</IngredientsTitle>

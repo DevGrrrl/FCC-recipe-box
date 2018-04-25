@@ -20,11 +20,11 @@ class MainContainer extends React.Component {
     this.createNewRecipe = this.createNewRecipe.bind(this);
     this.handleIngredients = this.handleIngredients.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
-    this.deleteRecipes = this.deleteRecipes.bind(this);
+    this.deleteRecipe = this.deleteRecipe.bind(this);
     this.toggleAddRecipeModal = this.toggleAddRecipeModal.bind(this);
     this.toggleEditModal = this.toggleEditModal.bind(this);
     this.toggleRecipeView = this.toggleRecipeView.bind(this);
-    this.changeState = this.changeState.bind(this);
+    this.changeRecipeView = this.changeRecipeView.bind(this);
     this.handleEditSubmit = this.handleEditSubmit.bind(this)
   }
 
@@ -59,17 +59,19 @@ componentDidMount(){
     ]})
   }
  }
+
+ //toggle recipe view
  
-  changeState(e, cb) {
+  changeRecipeView(e, cb) {
     let id = e.target.value;
     let recipes = [...this.state.recipes];
-    let newArr = recipes.map(elem => {
-      if (Number(elem.id) === Number(id)) {
-        elem.view = !elem.view;
-        return elem;
+    let newArr = recipes.map(recipe => {
+      if (parseInt(recipe.id, 10) === parseInt(id, 10)) {
+        recipe.view = !recipe.view;
+        return recipe;
       } else {
-        elem.view = false;
-        return elem;
+        recipe.view = false;
+        return recipe;
       }
     });
     cb(newArr);
@@ -77,13 +79,16 @@ componentDidMount(){
 
   toggleRecipeView(e) {
     e.preventDefault();
-    this.changeState(e, res => {
+    this.changeRecipeView(e, res => {
       this.setState({
         recipes: res,
         currentRecipe: e.target.value
       });
     });
   }
+
+
+  //Toggle add recipe modal
 
   toggleAddRecipeModal(e) {
     e.preventDefault();
@@ -92,6 +97,8 @@ componentDidMount(){
     });
   }
 
+  //Toggle Edit recipe modal
+
   toggleEditModal(e) {
     e.preventDefault();
     this.setState({
@@ -99,27 +106,8 @@ componentDidMount(){
     })
   }
 
-  deleteRecipes(id, recipes, cb) {
-    let filteredRecipes = recipes;
-    filteredRecipes = filteredRecipes.filter(recipe => {
-      return !(Number(recipe.id) === Number(id));
-    });
-    cb(filteredRecipes);
-  }
 
-  handleDelete(e) {
-    e.preventDefault();
-    const id = e.target.value;
-    let recipes = [...this.state.recipes];
-    let newRecipes;
-    this.deleteRecipes(id, recipes, function(res) {
-      newRecipes = res;
-    });
-    localStorage.setItem("recipes", JSON.stringify(newRecipes));
-    this.setState({
-      recipes: JSON.parse(localStorage.getItem("recipes"))
-    });
-  }
+  //update state with inputs in recipe name and ingredients fields on forms 
 
   handleRecipeName(e) {
     const value = e.target.value;
@@ -133,16 +121,43 @@ componentDidMount(){
     this.setState({
       addIngredients: value
     });
+
   }
+
+  //Delete Recipe 
+
+  deleteRecipe(id, recipes, cb) {
+    let filteredRecipes = recipes;
+    filteredRecipes = filteredRecipes.filter(recipe => {
+      return !(parseInt(recipe.id, 10) === parseInt(id, 10));
+    });
+    cb(filteredRecipes);
+  }
+
+  handleDelete(e) {
+    e.preventDefault();
+    const id = e.target.value;
+    let recipes = [...this.state.recipes];
+    let newRecipes;
+    this.deleteRecipe(id, recipes, function(res) {
+      newRecipes = res;
+    });
+    localStorage.setItem("recipes", JSON.stringify(newRecipes));
+    this.setState({
+      recipes: JSON.parse(localStorage.getItem("recipes"))
+    });
+  }
+
+ 
+
+//Create new recipe 
 
   createNewRecipe(cb) {
     let ingredients = this.state.addIngredients;
     ingredients = ingredients.split(",");
-    const name = this.state.addName;
-    
+    const name = this.state.addName; 
     //generate unique id
-    const recipes = this.state.recipes;
-    const length = this.state.recipes.length;
+    const recipes = [...this.state.recipes];
     const theId = `recipe${Date.now()}`
    
     const newRecipe = {
@@ -170,6 +185,8 @@ componentDidMount(){
   
   }
 
+  //Edit Recipe
+
   handleEditSubmit(e){
     e.preventDefault()
     //if this.state.addName , use the orignal recipe
@@ -180,12 +197,15 @@ componentDidMount(){
     const name = this.state.addName;
 
     let editedRecipes = recipes.filter(recipe=>{
+      //if the current recipe being edited has the same id as the recipe in state
       if(parseInt(recipe.id,10) === parseInt(this.state.currentRecipe,10)){
+        //if new data has been added in the name field, replace the old name
         if(this.state.addName){
           recipe.name = name
         }
+        //if new data has been added in the ingredients field, replace the old ingredients
         if(this.state.addIngredients){
-          recipe.ingredients =ingredients
+          recipe.ingredients = ingredients
         } 
         return recipe;
       } else {
@@ -199,21 +219,21 @@ componentDidMount(){
       addName: "",
       addIngredients: "",
     });
-    
+  
    localStorage.setItem('recipes', JSON.stringify(editedRecipes));
   }
   
   getRecipes = recipes => {
-    return recipes.map((elem, i) => {
+    return recipes.map((recipe, i) => {
       return (
         <Recipe
           key={i}
-          element={elem}
+          element={recipe}
           handleDelete={this.handleDelete}
           handleEdit={this.handleEdit}
           toggleEditModal={this.toggleEditModal}
           toggleRecipeView={this.toggleRecipeView}
-          recipeViewState={elem.view}
+          recipeViewState={recipe.view}
           editRecipeModalState={this.state.editRecipeModalState}
           handleRecipeName ={this.handleRecipeName}
           handleIngredients ={this.handleIngredients}
