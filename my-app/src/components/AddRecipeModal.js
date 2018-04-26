@@ -63,7 +63,6 @@ const TextArea = styled.textarea `
 
 const Input = styled.input `
   font-size: 1rem;
-  background-color: #eee;
   color: #444;
   cursor: pointer;
   padding: 3%;
@@ -77,8 +76,9 @@ border-width: 2px;
 border-style: solid;
 border-color: red;
 ` 
+
 const RecipeModal = props => {
-  
+
   return (
     <ModalContainer>
       <AddRecipe type="submit" id="myBtn" onClick={props.toggleAddRecipeModal}>
@@ -106,6 +106,7 @@ const RecipeModal = props => {
                   placeholder="recipe name"
                   onChange={props.handleRecipeName}
                   pattern="[-zA-Z0-9-]+"
+                  className={props.errors.name? "error" :""}
                 />
                 <p>
                   <Label htmlFor="enter-recipe-ingredients">Ingredients</Label>
@@ -117,9 +118,11 @@ const RecipeModal = props => {
                     onChange={props.handleIngredients}
                     placeholder="Enter the ingredients separated by a comma"
                     pattern="[-zA-Z0-9-]+"
+                    className={props.errors.ingredients ? "error" : ""}
+
                   />
                 </p>
-                <Input disabled={!props.isEnabled}type="submit" value="Add Recipe" />
+                <Input className = {props.errors.ingredients || props.errors.name ? "disabled" : "enabled" } disabled={!props.addIsEnabled}type="submit" value="Add Recipe" />
               </Fieldset>
             </form>
           </ModalContent>

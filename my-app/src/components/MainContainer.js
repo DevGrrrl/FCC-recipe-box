@@ -109,6 +109,8 @@ componentDidMount(){
 
   //update state with inputs in recipe name and ingredients fields on forms 
 
+
+
   handleRecipeName(e) {
     const value = e.target.value;
     this.setState({
@@ -152,6 +154,12 @@ componentDidMount(){
 
 //Create new recipe 
 
+ validateNewRecipe = (name, ingredients) => {
+  return{
+    name: name.length === 0,
+    ingredients: ingredients.length === 0
+  }
+ }
   createNewRecipe(cb) {
     let ingredients = this.state.addIngredients;
     ingredients = ingredients.split(",");
@@ -249,14 +257,14 @@ componentDidMount(){
   };
   render() {
     const {addName, addIngredients} = this.state
-    const addIsEnabled = addName.length > 0  && addIngredients.length > 0
-    const editIsEnabled = addName.length > 0  && addIngredients.length > 0 
+    const errors = this.validateNewRecipe(addName, addIngredients)
+    const addIsEnabled = !Object.keys(errors).some(x => errors[x]);
     return (
       <div className = "container">
         <RecipeList className ="recipes-container" recipeList ={this.getRecipes(this.state.recipes)} />
         <AddRecipeModal
           addIsEnabled = {addIsEnabled}
-          editIsEnabled = {editIsEnabled}
+          errors={errors}
           toggleAddRecipeModal={this.toggleAddRecipeModal}
           addRecipeModalState={this.state.addRecipeModalState}
           ingredients={this.state.addIngredients}
