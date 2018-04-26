@@ -12,7 +12,9 @@ class MainContainer extends React.Component {
       addName: "",
       addRecipeModalState: false,
       editRecipeModalState: false,
-      currentRecipe: 0
+      currentRecipe: 0,
+      nameModified: false,
+      ingredientsModified: false
     };
 
     this.handleRecipeName = this.handleRecipeName.bind(this);
@@ -114,14 +116,16 @@ componentDidMount(){
   handleRecipeName(e) {
     const value = e.target.value;
     this.setState({
-      addName: value.toUpperCase()
+      addName: value.toUpperCase(),
+      nameModified: true
     });
   }
 
   handleIngredients(e) {
     const value = e.target.value;
     this.setState({
-      addIngredients: value
+      addIngredients: value,
+      ingredientsModified: true
     });
 
   }
@@ -154,7 +158,7 @@ componentDidMount(){
 
 //Create new recipe 
 
- validateNewRecipe = (name, ingredients) => {
+ validateNewRecipe(name, ingredients){
   return{
     name: name.length === 0,
     ingredients: ingredients.length === 0
@@ -189,13 +193,22 @@ componentDidMount(){
         recipes: updatedRecipes,
         addName: "",
         addIngredients: "",
-        addRecipeModalState: !this.state.addRecipeModalState 
+        addRecipeModalState: !this.state.addRecipeModalState,
+        nameModified:false,
+        ingredientsModified:false
       });
     })
   
   }
 
   //Edit Recipe
+
+  validateRecipeEdit(name, ingredients){
+    return{
+      name: name.length === 0,
+      ingredients: ingredients.length === 0
+    }
+   }
 
  
   handleEditSubmit(e){
@@ -229,32 +242,44 @@ componentDidMount(){
       editRecipeModalState: !this.state.editRecipeModalState,
       addName: "",
       addIngredients: "",
+      nameModified: false,
+      ingredientsModified:false
     });
   
    localStorage.setItem('recipes', JSON.stringify(editedRecipes));
   }
   
-  getRecipes = recipes => {
+  getRecipes(recipes){
+    const nameModified = this.state.nameModified;
+    const ingredientsModified = this.state.ingredientsModified;
+    const {addName, addIngredients} = this.state
+    const errors = this.validateRecipeEdit(addName, addIngredients)
+    const editIsEnabled = !Object.keys(errors).some(x => errors[x]);
+
     return recipes.map((recipe, i) => {
       return (
         <Recipe
           key={i}
           element={recipe}
           handleDelete={this.handleDelete}
-          handleEdit={this.handleEdit}
           toggleEditModal={this.toggleEditModal}
           toggleRecipeView={this.toggleRecipeView}
           recipeViewState={recipe.view}
           editRecipeModalState={this.state.editRecipeModalState}
           handleRecipeName ={this.handleRecipeName}
           handleIngredients ={this.handleIngredients}
-          name={this.state.AddName}
-          addIngredients={this.state.addIngredients}
+          name={this.state.addName}
+          ingredients={this.state.addIngredients}
           handleEditSubmit={this.handleEditSubmit}
+          nameModified={nameModified}
+          ingredientsModified={ingredientsModified}
+          editIsEnabled = {editIsEnabled}
+          errors={errors}
         />
       );
     });
-  };
+  }
+
   render() {
     const {addName, addIngredients} = this.state
     const errors = this.validateNewRecipe(addName, addIngredients)

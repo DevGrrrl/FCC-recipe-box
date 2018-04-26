@@ -63,6 +63,7 @@ const TextArea = styled.textarea `
 
 const Input = styled.input `
   font-size: 1rem;
+
   color: #444;
   cursor: pointer;
   padding: 3%;
@@ -119,7 +120,6 @@ const RecipeModal = props => {
                     placeholder="Enter the ingredients separated by a comma"
                     pattern="[-zA-Z0-9-]+"
                     className={props.errors.ingredients ? "error" : ""}
-
                   />
                 </p>
                 <Input className = {props.errors.ingredients || props.errors.name ? "disabled" : "enabled" } disabled={!props.addIsEnabled}type="submit" value="Add Recipe" />
