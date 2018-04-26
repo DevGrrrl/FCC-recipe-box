@@ -116,7 +116,7 @@ componentDidMount(){
   handleRecipeName(e) {
     const value = e.target.value;
     this.setState({
-      addName: value.toUpperCase(),
+      addName: value,
       nameModified: true
     });
   }
@@ -166,7 +166,8 @@ componentDidMount(){
  }
   createNewRecipe(cb) {
     let ingredients = this.state.addIngredients;
-    ingredients = ingredients.split(",");
+    ingredients= ingredients.replace(/(^,)|(,$)/g, "").split(",");
+    console.log('the ingredients ', ingredients)
     const name = this.state.addName; 
     //generate unique id
     const recipes = [...this.state.recipes];
