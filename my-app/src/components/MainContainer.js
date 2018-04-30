@@ -2,6 +2,7 @@ import React from "react";
 import Recipe from "./Recipe";
 import AddRecipeModal from "./AddRecipeModal";
 import RecipeList from './RecipeList';
+import Header from './Header'
 
 class MainContainer extends React.Component {
   constructor() {
@@ -169,6 +170,7 @@ componentDidMount(){
     ingredients= ingredients.replace(/(^,)|(,$)/g, "").split(",");
     console.log('the ingredients ', ingredients)
     const name = this.state.addName; 
+    
     //generate unique id
     const recipes = [...this.state.recipes];
     const theId = `recipe${Date.now()}`
@@ -286,7 +288,9 @@ componentDidMount(){
     const errors = this.validateNewRecipe(addName, addIngredients)
     const addIsEnabled = !Object.keys(errors).some(x => errors[x]);
     return (
-      <div className = "container">
+      <div className = "app">
+      <Header />
+      <div className = "recipe-list-container">
         <RecipeList className ="recipes-container" recipeList ={this.getRecipes(this.state.recipes)} />
         <AddRecipeModal
           addIsEnabled = {addIsEnabled}
@@ -299,6 +303,7 @@ componentDidMount(){
           handleIngredients={this.handleIngredients}
           handleRecipeSubmit={this.handleRecipeSubmit}
         />
+      </div>
       </div>
     );
   }

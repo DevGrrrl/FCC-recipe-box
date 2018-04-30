@@ -13,6 +13,7 @@ const Modal = styled.div`
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  
 `;
 
 const ModalContent = styled.div`
@@ -42,6 +43,7 @@ const Input = styled.input`
   cursor: pointer;
   padding: 3%;
 `;
+
 
 const Fieldset = styled.fieldset`
   border-width: 2px;

@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 
 const ModalContainer = styled.div`
@@ -8,19 +9,19 @@ const ModalContainer = styled.div`
 `
 
 const AddRecipe = styled.button`
-  background-color: #b5b3b3;
-  color: #444;
-  cursor: pointer;
-  padding: 3%;
-  width: 50%;
-  margin-top: 1%;
-  margin-bottom: 1%;
+  background-color: #8650FF;
+  box-shadow: 0 0 10px #bbb7b7;
+  color: white;
+  font-family: 'Roboto Mono', monospace;
+  padding: 4%;
+  margin-top: 3%;
+  margin-bottom: 3%;
   text-align: center;
   border: none;
   outline: none;
   transition: 0.4s;
-  border-radius: 10px;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
   @media (min-width: 700px) {
      width: 20%;
      padding: 0.5%;
@@ -83,7 +84,7 @@ const RecipeModal = props => {
   return (
     <ModalContainer>
       <AddRecipe type="submit" id="myBtn" onClick={props.toggleAddRecipeModal}>
-        Add New Recipe
+        Add
       </AddRecipe>
 {/* IF addRecipeModalState is true, return the add recipe modal  */}
       {props.addRecipeModalState ? (
