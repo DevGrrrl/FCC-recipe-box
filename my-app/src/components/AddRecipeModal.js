@@ -87,7 +87,7 @@ const RecipeModal = props => {
         Add
       </AddRecipe>
 {/* IF addRecipeModalState is true, return the add recipe modal  */}
-      {props.addRecipeModalState ? (
+      {props.addRecipeModalState && (
         <Modal id="myModal" className="modal">
           <ModalContent className="modal-content">
           {/* closeAddRecipeModal */}
@@ -128,10 +128,7 @@ const RecipeModal = props => {
             </form>
           </ModalContent>
         </Modal>
-      ) : (
-        // else return null
-        null
-  )
+      ) 
 }
 </ModalContainer>
   )}
