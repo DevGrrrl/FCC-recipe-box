@@ -13,42 +13,65 @@ const Modal = styled.div`
   overflow: auto; /* Enable scroll if needed */
   background-color: rgb(0, 0, 0); /* Fallback color */
   background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-  
 `;
 
 const ModalContent = styled.div`
-  background-color: #fefefe;
-  display: block;
-  font-size: 1rem;
-  margin: 15% auto; /* 15% from the top and centered */
+  margin: 15% auto;
   padding: 20px;
-  border: 1px solid #888;
-  background: #ffeded;
-  width: 80%; /* Could be more or less, depending on screen size */
+  background-color: white;
+  width: 85%;
 `;
-
 const Label = styled.label`
   display: block;
-  font-size: 1rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #383838;
+  margin: 4%;
 `;
 const TextArea = styled.textarea`
   display: block;
-  padding: 2%;
-  font-size: 1rem;
+  padding: 3%;
+  border-radius: 12px;
+  font-size: 1.2rem;
+  width: 90%;
+  margin: auto;
+  color: #383838;
+  font-family: "Roboto Mono", monospace;
 `;
 
 const Input = styled.input`
-  font-size: 1rem;
-  color: #444;
-  cursor: pointer;
-  padding: 3%;
+  font-size: 1.2rem;
+  font-family: "Roboto Mono", monospace;
+  color: white;
+  background-color: #8650ff;
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 0 10px #bbb7b7;
+  padding: 4%;
 `;
 
-
 const Fieldset = styled.fieldset`
-  border-width: 2px;
-  border-style: solid;
-  border-color: red;
+  display: block;
+  padding: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: auto;
+  border: none;
+`;
+
+const Hr = styled.hr`
+  background-color: #d9d9d9;
+  height: 1px;
+  border: none;
+  margin-top: 5%;
+  margin-bottom: 0;
+`;
+
+const Legend = styled.legend`
+  font-size: 1.5rem;
+  color: #383838;
+  font-weight: 500;
+  margin: auto;
 `;
 const EditModal = props => {
   console.log(props.ingredientsModified);
@@ -92,7 +115,8 @@ const EditModal = props => {
             }}
           >
             <Fieldset>
-              <legend>Edit Recipe</legend>
+              <Legend>Edit Recipe</Legend>
+              <Hr />
               <Label htmlFor="enter-recipe-name">Recipe</Label>
               <TextArea
                 id="enter-recipe-name"
@@ -101,7 +125,11 @@ const EditModal = props => {
                 defaultValue={props.element.name}
                 onChange={props.handleRecipeName}
                 className={
-                  props.nameModified ? (props.errors.name ? "error" : "no-error") : "no-error"
+                  props.nameModified
+                    ? props.errors.name
+                      ? "error"
+                      : "no-error"
+                    : "no-error"
                 }
               />
               <p>

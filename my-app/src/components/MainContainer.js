@@ -96,7 +96,9 @@ componentDidMount(){
   toggleAddRecipeModal(e) {
     e.preventDefault();
     this.setState({
-      addRecipeModalState: !this.state.addRecipeModalState
+      addRecipeModalState: !this.state.addRecipeModalState,
+      addName: "",
+      addIngredients: "",
     });
   }
 
@@ -106,6 +108,7 @@ componentDidMount(){
     e.preventDefault();
     this.setState({
       editRecipeModalState: !this.state.editRecipeModalState,
+  
     })
   }
 
