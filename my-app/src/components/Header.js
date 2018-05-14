@@ -14,7 +14,7 @@ const StyledHeader = styled.header`
   font-family: 'Roboto Mono', monospace;
 `
 const Title = styled.h1`
-  margin: 0;
+  margin-top: 2%;
   font-size: 2.5rem;
   line-height: 6.5rem;
   text-align: center;

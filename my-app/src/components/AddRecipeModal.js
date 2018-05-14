@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 const ModalContainer = styled.div`
   width: 90%;
   margin: auto;
+ 
 `;
 
 const AddRecipe = styled.button`
@@ -83,16 +84,16 @@ const Legend = styled.legend`
   margin: auto;
 `;
 
-const CloseModal = styled.button`
-  margin-top: -15%;
-  height: 30px;
-  color: #8650ff;
-  background-color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 2.5rem;
-  padding: 2%;
-`;
+// const CloseModal = styled.button`
+//   margin-top: -15%;
+//   height: 30px;
+//   color: #8650ff;
+//   background-color: white;
+//   border: none;
+//   border-radius: 12px;
+//   font-size: 2.5rem;
+//   padding: 2%;
+// `;
 const Fieldset = styled.fieldset`
   display: block;
   padding: 0;
@@ -120,19 +121,19 @@ const RecipeModal = props => {
       {props.addRecipeModalState && (
         <Modal>
           <ModalContent>
+               {/* closeAddRecipeModal */}
+               <span
+                  onClick={props.toggleAddRecipeModal}
+                  className="close"
+                >
+                  &times;
+                </span>
             <form
               onSubmit={e => {
                 props.handleRecipeSubmit(e);
               }}
             >
               <Fieldset>
-                {/* closeAddRecipeModal */}
-                <CloseModal
-                  onClick={props.toggleAddRecipeModal}
-                  className="close"
-                >
-                  &times;
-                </CloseModal>
                 <Legend>Add Recipe </Legend>
                 <Hr />
                 <Label htmlFor="enter-recipe-name">Recipe</Label>

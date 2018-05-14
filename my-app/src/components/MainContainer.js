@@ -294,7 +294,7 @@ componentDidMount(){
       <div className = "app">
       <Header />
       <div className = "recipe-list-container">
-        <RecipeList className ="recipes-container" recipeList ={this.getRecipes(this.state.recipes)} />
+        <RecipeList recipeList ={this.getRecipes(this.state.recipes)} />
         <AddRecipeModal
           addIsEnabled = {addIsEnabled}
           errors={errors}
