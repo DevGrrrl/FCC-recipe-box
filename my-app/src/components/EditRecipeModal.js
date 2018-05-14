@@ -101,7 +101,7 @@ const EditModal = props => {
                 defaultValue={props.element.name}
                 onChange={props.handleRecipeName}
                 className={
-                  props.nameModified ? (props.errors.name ? "error" : "") : ""
+                  props.nameModified ? (props.errors.name ? "error" : "no-error") : "no-error"
                 }
               />
               <p>
@@ -116,8 +116,8 @@ const EditModal = props => {
                     props.ingredientsModified
                       ? props.errors.ingredients
                         ? "error"
-                        : ""
-                      : ""
+                        : "no-error"
+                      : "no-error"
                   }
                 />
               </p>
