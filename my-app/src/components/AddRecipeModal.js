@@ -140,6 +140,7 @@ const RecipeModal = props => {
                   id="enter-recipe-name"
                   cols="35"
                   rows="1"
+                  maxLength ="24"
                   value={props.name}
                   placeholder="Recipe name"
                   onChange={props.handleRecipeName}

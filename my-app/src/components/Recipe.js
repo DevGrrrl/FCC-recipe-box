@@ -11,7 +11,8 @@ const RecipeTitle = styled.button`
   border-bottom: 1px solid #d9d9d9;
   font-family: "Roboto Mono", monospace;
   font-weight: 500;
-  cursor: pointer;
+  text-overflow: ellipsis;
+  overflow: hidden;
   padding: 5%;
   width: 100%;
   display: block;
@@ -44,6 +45,7 @@ const IngredientsTitle = styled.h3`
   color: #383838;
   text-align: left;
   font-weight: 500;
+
   @media (min-width: 500px) {
     padding-left: 2%;
   }
@@ -62,6 +64,7 @@ const Button = styled.button`
   transition: 0.4s;
   font-size: 1.2rem;
   font-family: "Roboto Mono", monospace;
+
 
   @media (min-width: 500px) {
     padding: 1.5%;
