@@ -20,3 +20,8 @@ A Free Code Camp project built with React
 * Mobile First
 * Styled Components
 * Client-side validation
+
+ Gif showing progress so far:
+ 
+ ![recipe-app](https://user-images.githubusercontent.com/22034073/39999746-cf408778-5781-11e8-8649-2290c6406768.gif)
+
