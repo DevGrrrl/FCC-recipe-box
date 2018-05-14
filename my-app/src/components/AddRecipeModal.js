@@ -1,18 +1,17 @@
 import React from "react";
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
-
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const ModalContainer = styled.div`
   width: 90%;
   margin: auto;
-`
+`;
 
 const AddRecipe = styled.button`
-  background-color: #8650FF;
+  background-color: #8650ff;
   box-shadow: 0 0 10px #bbb7b7;
   color: white;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   padding: 4%;
   margin-top: 3%;
   margin-bottom: 3%;
@@ -22,12 +21,11 @@ const AddRecipe = styled.button`
   transition: 0.4s;
   border-radius: 12px;
   font-size: 1.2rem;
-  @media (min-width: 700px) {
-     width: 20%;
-     padding: 0.5%;
- }
-  
-`
+  @media (min-width: 500px) {
+    width: 20%;
+    padding: 0.5%;
+  }
+`;
 
 const Modal = styled.div`
   /* Hidden by default */
@@ -38,11 +36,11 @@ const Modal = styled.div`
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-`
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+`;
 
-const ModalContent = styled.div `
+const ModalContent = styled.div`
   background-color: #fefefe;
   display: block;
   margin: 15% auto; /* 15% from the top and centered */
@@ -50,48 +48,48 @@ const ModalContent = styled.div `
   border: 1px solid #888;
   background: #ffeded;
   width: 80%; /* Could be more or less, depending on screen size */
-`
+`;
 const Label = styled.label`
-  display:block;
+  display: block;
   font-size: 1rem;
-
-`
-const TextArea = styled.textarea `
-  display:block;
+`;
+const TextArea = styled.textarea`
+  display: block;
   padding: 2%;
   font-size: 1rem;
-`
+`;
 
-const Input = styled.input `
+const Input = styled.input`
   font-size: 1rem;
 
   color: #444;
   cursor: pointer;
   padding: 3%;
- `
+`;
 
-const Fieldset = styled.fieldset `
-text-overflow: ellipsis;
-overflow: hidden;
-margin: 0;
-border-width: 2px;
-border-style: solid;
-border-color: red;
-` 
+const Fieldset = styled.fieldset`
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin: 0;
+  border-width: 2px;
+  border-style: solid;
+  border-color: red;
+`;
 
 const RecipeModal = props => {
-
   return (
     <ModalContainer>
       <AddRecipe type="submit" id="myBtn" onClick={props.toggleAddRecipeModal}>
         Add
       </AddRecipe>
-{/* IF addRecipeModalState is true, return the add recipe modal  */}
+      {/* IF addRecipeModalState is true, return the add recipe modal  */}
       {props.addRecipeModalState && (
-        <Modal id="myModal" className="modal">
-          <ModalContent className="modal-content">
-          {/* closeAddRecipeModal */}
-            <span onClick = {props.toggleAddRecipeModal}className="close">&times;</span>
+        <Modal>
+          <ModalContent>
+            {/* closeAddRecipeModal */}
+            <span onClick={props.toggleAddRecipeModal} className="close">
+              &times;
+            </span>
             <form
               onSubmit={e => {
                 props.handleRecipeSubmit(e);
@@ -108,7 +106,7 @@ const RecipeModal = props => {
                   placeholder="recipe name"
                   onChange={props.handleRecipeName}
                   pattern="[-zA-Z0-9-]+"
-                  className={props.errors.name? "error" :""}
+                  className={props.errors.name ? "error" : ""}
                 />
                 <p>
                   <Label htmlFor="enter-recipe-ingredients">Ingredients</Label>
@@ -123,14 +121,23 @@ const RecipeModal = props => {
                     className={props.errors.ingredients ? "error" : ""}
                   />
                 </p>
-                <Input className = {props.errors.ingredients || props.errors.name ? "disabled" : "enabled" } disabled={!props.addIsEnabled}type="submit" value="Add Recipe" />
+                <Input
+                  className={
+                    props.errors.ingredients || props.errors.name
+                      ? "disabled"
+                      : "enabled"
+                  }
+                  disabled={!props.addIsEnabled}
+                  type="submit"
+                  value="Add Recipe"
+                />
               </Fieldset>
             </form>
           </ModalContent>
         </Modal>
-      ) 
-}
-</ModalContainer>
-  )}
+      )}
+    </ModalContainer>
+  );
+};
 
 export default RecipeModal;

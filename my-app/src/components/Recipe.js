@@ -6,7 +6,7 @@ import styled from "styled-components";
 /* Style the buttons that are used to open and close the accordion panel */
 const RecipeTitle = styled.button`
   background-color: white;
-  color: #444;
+  color: #383838;
   border: none;
   border-bottom: 1px solid #d9d9d9;
   font-family: "Roboto Mono", monospace;
@@ -19,19 +19,19 @@ const RecipeTitle = styled.button`
   height: 10%;
   text-align: left;
   outline: none;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   transition: 0.4s;
   &:nth-child(1) {
     border-radius: 5px 5px 0 0;
   }
-  @media (min-width: 700px) {
-    width: 90%;
+  @media (min-width: 500px) {
     padding: 2%;
   }
 `;
 
 /* Style the accordion panel. Note: hidden by default */
 const IngredientsList = styled.div`
+  color: #383838;
   background-color: white;
   overflow: hidden;
   width: 90%;
@@ -41,9 +41,10 @@ const IngredientsList = styled.div`
   font-family: "Roboto Mono", monospace;
 `;
 const IngredientsTitle = styled.h3`
+  color: #383838;
   text-align: left;
   font-weight: 500;
-  @media (min-width: 700px) {
+  @media (min-width: 500px) {
     padding-left: 2%;
   }
 `;
@@ -51,7 +52,6 @@ const IngredientsTitle = styled.h3`
 const Button = styled.button`
   background-color: #8650ff;
   box-shadow: 0 0 10px #bbb7b7;
-
   color: white;
   padding: 4%;
   text-align: center;
@@ -63,9 +63,8 @@ const Button = styled.button`
   font-size: 1.2rem;
   font-family: "Roboto Mono", monospace;
 
-  @media (min-width: 700px) {
-    width: 8%;
-    padding: 1%;
+  @media (min-width: 500px) {
+    padding: 1.5%;
   }
 `;
 
@@ -77,8 +76,21 @@ const ListCont = styled.ul`
   padding-left: 5%;
 `;
 
-const RecipeContainer = styled.div`
+const RecipeBorderTop = styled.hr`
+  background-color: #8650ff;
+  height: 3px;
+  border: none;
+  margin: 0;
 `;
+
+const RecipeBorderBottom = styled.hr`
+  background-color: #8650ff;
+  height: 3px;
+  border: none;
+  margin-top: 5%;
+  margin-bottom: 0;
+`;
+const RecipeContainer = styled.div``;
 
 const TitleContainer = styled.div``;
 
@@ -102,6 +114,7 @@ const Recipe = props => {
           >
             {props.element.name}
           </RecipeTitle>
+          <RecipeBorderTop />
           <IngredientsList>
             <IngredientsTitle>Ingredients</IngredientsTitle>
             <ListCont>{getIngredients(props.element.ingredients)}</ListCont>
@@ -123,7 +136,7 @@ const Recipe = props => {
             </Button>
             {props.editRecipeModalState ? <EditRecipeModal {...props} /> : null}
           </IngredientsList>
-          <hr />
+          <RecipeBorderBottom />
         </RecipeContainer>
       ) : (
         <TitleContainer>

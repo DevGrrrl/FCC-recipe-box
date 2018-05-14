@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const StyledHeader = styled.header`
-  height: 200px;
+  height: 37%;
   background: rgb(126, 74, 232);
   background: linear-gradient(
     167deg,
@@ -10,13 +10,13 @@ const StyledHeader = styled.header`
     rgba(126, 74, 232, 1) 34%,
     rgba(154, 0, 255, 1) 100%
   );
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 70%);
   font-family: 'Roboto Mono', monospace;
 `
 const Title = styled.h1`
   margin: 0;
   font-size: 2.5rem;
-  line-height: 7rem;
+  line-height: 6.5rem;
   text-align: center;
   color: white;
 `

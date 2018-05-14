@@ -3,8 +3,6 @@ body {
   font-family: 'Roboto Mono', monospace;
 }
 
-
-
 .app {
   width: 100%;
   background-color: white;
@@ -13,7 +11,7 @@ body {
 .recipe-list-container {
   position: absolute;
   margin-left: 5%;
-  margin-top: -20%;
+  margin-top: -37%;
   width: 90%;
   background-color: white;
   border-radius: 5px;
@@ -21,9 +19,6 @@ body {
 
 }
 
-.recipesContainer {
-  background-color: blue;
-}
 
 .none {
   display: none;
@@ -53,11 +48,7 @@ body {
   background-color: #ccc;
 }
 
-@media (min-width: 700px) {
-  .container {
-    width: 80%;
-  }
-}
+
 
 .error {
   border: 4px solid red;
@@ -69,4 +60,18 @@ body {
 
 .enabled {
   background-color: #b5fcf7;
+}
+
+@media (min-width: 500px) {
+  .container {
+    width: 80%;
+  }
+  .recipe-list-container {
+   
+    margin-top: -25%;
+    width: 90%;
+   
+  }
+  
+
 }
