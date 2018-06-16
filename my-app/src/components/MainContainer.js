@@ -96,28 +96,23 @@ componentDidMount(){
   toggleAddRecipeModal(e) {
     e.preventDefault();
    
-    this.setState((prevState)=>{
-      return {
+    this.setState((prevState)=>({
         addRecipeModalState: !prevState.addRecipeModalState,
         addName: "",
         addIngredients: "",
-      }
-    });
+      }))
   }
 
   //Toggle Edit recipe modal
 
   toggleEditModal(e) {
     e.preventDefault();
-    this.setState((prevState)=>{
-      return {
-        editRecipeModalState: !prevState.editRecipeModalState,
-      }
-    })
+    this.setState((prevState)=>({
+        editRecipeModalState: !prevState.editRecipeModalState,   
+    }))
   }
 
   //update state with inputs in recipe name and ingredients fields on forms 
-
 
 
   handleRecipeName(e) {
@@ -197,19 +192,17 @@ componentDidMount(){
     e.preventDefault();
     this.createNewRecipe(recipes => {
       const updatedRecipes = recipes;
-      this.setState((prevState)=>{
-        return {
+      this.setState((prevState)=>({
           recipes: updatedRecipes,
           addName: "",
           addIngredients: "",
           addRecipeModalState: !prevState.addRecipeModalState,
           nameModified:false,
           ingredientsModified:false
-        }
+        }))
       });
-    })
+    }
   
-  }
 
   //Edit Recipe
 
@@ -247,16 +240,15 @@ componentDidMount(){
       }
     });
 
-    this.setState((prevState, props)=>{
-      return {
+    this.setState((prevState)=>({
         recipes: editedRecipes,
         editRecipeModalState: !prevState.editRecipeModalState,
         addName: "",
         addIngredients: "",
         nameModified: false,
-        ingredientsModified:false
-      }
-    });
+        ingredientsModified:false  
+    })
+  );
   
 
    localStorage.setItem('recipes', JSON.stringify(editedRecipes));
