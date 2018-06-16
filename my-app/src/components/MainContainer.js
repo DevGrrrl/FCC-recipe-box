@@ -93,14 +93,28 @@ componentDidMount(){
 
   //Toggle add recipe modal
 
+  // toggleAddRecipeModal(e) {
+  //   e.preventDefault();
+  //   this.setState({
+  //     addRecipeModalState: !this.state.addRecipeModalState,
+  //     addName: "",
+  //     addIngredients: "",
+  //   });
+  // }
+
   toggleAddRecipeModal(e) {
     e.preventDefault();
-    this.setState({
-      addRecipeModalState: !this.state.addRecipeModalState,
-      addName: "",
-      addIngredients: "",
+   
+    this.setState((prevState, props)=>{
+      console.log("toggle add", props)
+      return {
+        addRecipeModalState: !prevState.addRecipeModalState,
+        addName: "",
+        addIngredients: "",
+      }
     });
   }
+
 
   //Toggle Edit recipe modal
 
