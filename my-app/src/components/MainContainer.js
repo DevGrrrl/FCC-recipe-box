@@ -193,7 +193,6 @@ componentDidMount(){
   }
   
 
-
    handleRecipeSubmit(e) {
     e.preventDefault();
     this.createNewRecipe(recipes => {
@@ -248,17 +247,27 @@ componentDidMount(){
       }
     });
 
-    this.setState({
-      recipes: editedRecipes,
-      editRecipeModalState: !this.state.editRecipeModalState,
-      addName: "",
-      addIngredients: "",
-      nameModified: false,
-      ingredientsModified:false
+    this.setState((prevState, props)=>{
+      return {
+        recipes: editedRecipes,
+        editRecipeModalState: !prevState.editRecipeModalState,
+        addName: "",
+        addIngredients: "",
+        nameModified: false,
+        ingredientsModified:false
+      }
     });
+  
   
    localStorage.setItem('recipes', JSON.stringify(editedRecipes));
   }
+
+
+
+
+
+
+
   
   getRecipes(recipes){
     const nameModified = this.state.nameModified;
