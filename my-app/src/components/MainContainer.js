@@ -107,15 +107,6 @@ componentDidMount(){
 
   //Toggle Edit recipe modal
 
-  // toggleEditModal(e) {
-  //   e.preventDefault();
-  //   this.setState({
-  //     editRecipeModalState: !this.state.editRecipeModalState,
-  
-  //   })
-  // }
-
-
   toggleEditModal(e) {
     e.preventDefault();
     this.setState((prevState, props)=>{
@@ -203,17 +194,19 @@ componentDidMount(){
   
 
 
-  handleRecipeSubmit(e) {
+   handleRecipeSubmit(e) {
     e.preventDefault();
     this.createNewRecipe(recipes => {
       const updatedRecipes = recipes;
-      this.setState({
-        recipes: updatedRecipes,
-        addName: "",
-        addIngredients: "",
-        addRecipeModalState: !this.state.addRecipeModalState,
-        nameModified:false,
-        ingredientsModified:false
+      this.setState((prevState,props)=>{
+        return {
+          recipes: updatedRecipes,
+          addName: "",
+          addIngredients: "",
+          addRecipeModalState: !prevState.addRecipeModalState,
+          nameModified:false,
+          ingredientsModified:false
+        }
       });
     })
   
