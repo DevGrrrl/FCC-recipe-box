@@ -93,20 +93,10 @@ componentDidMount(){
 
   //Toggle add recipe modal
 
-  // toggleAddRecipeModal(e) {
-  //   e.preventDefault();
-  //   this.setState({
-  //     addRecipeModalState: !this.state.addRecipeModalState,
-  //     addName: "",
-  //     addIngredients: "",
-  //   });
-  // }
-
   toggleAddRecipeModal(e) {
     e.preventDefault();
    
     this.setState((prevState, props)=>{
-      console.log("toggle add", props)
       return {
         addRecipeModalState: !prevState.addRecipeModalState,
         addName: "",
@@ -115,17 +105,25 @@ componentDidMount(){
     });
   }
 
-
   //Toggle Edit recipe modal
+
+  // toggleEditModal(e) {
+  //   e.preventDefault();
+  //   this.setState({
+  //     editRecipeModalState: !this.state.editRecipeModalState,
+  
+  //   })
+  // }
+
 
   toggleEditModal(e) {
     e.preventDefault();
-    this.setState({
-      editRecipeModalState: !this.state.editRecipeModalState,
-  
+    this.setState((prevState, props)=>{
+      return {
+        editRecipeModalState: !prevState.editRecipeModalState,
+      }
     })
   }
-
 
   //update state with inputs in recipe name and ingredients fields on forms 
 
